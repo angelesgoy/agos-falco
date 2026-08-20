@@ -68,7 +68,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ============ STICKY HEADER (DESKTOP) ============ */
+/* ============ STICKY HEADER (DESKTOP: TEXT TABS) ============ */
 .site-top-bar {
     position: -webkit-sticky;
     position: sticky;
@@ -157,10 +157,10 @@ body {
 }
 .tab-panel.active {
     display: block;
-    animation: tabAppear 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: tabAppear 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 @keyframes tabAppear {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
@@ -734,67 +734,64 @@ body {
     font-weight: 700; color: #ffffff; font-size: 0.95rem;
 }
 
-/* ============ COMPACT FLOATING DOCK (MOBILE) ============ */
+/* ============ ULTRA-COMPACT MOBILE FLOATING DOCK (SOLO ÍCONOS A LA VISTA) ============ */
 .mobile-bottom-dock {
     display: none;
     position: fixed;
-    bottom: 12px;
+    bottom: 14px;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 20px);
-    max-width: 440px;
+    width: calc(100% - 24px);
+    max-width: 390px;
     z-index: 3000;
     background-color: rgba(19, 16, 28, 0.96);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1.5px solid var(--dark-border);
-    border-radius: 18px;
-    padding: 6px 8px 6px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    border-radius: var(--radius-pill);
+    padding: 6px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
-.mobile-dock-inner {
-    display: flex; flex-direction: column; gap: 4px;
-}
-/* 7 Botones compactos uno al lado del otro con scroll suave */
-.mobile-dock-tabs-row {
+.mobile-dock-row-icons {
     display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
-    gap: 4px;
-    padding-bottom: 2px;
-    -webkit-overflow-scrolling: touch;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
-.mobile-dock-tabs-row::-webkit-scrollbar { display: none; }
-.dock-tab-btn {
-    flex-shrink: 0;
-    padding: 0.35rem 0.75rem;
-    font-size: 0.68rem; font-weight: 700;
-    color: var(--text-dim); background-color: var(--dark-surface);
-    border-radius: var(--radius-pill); cursor: pointer;
-    border: 1px solid var(--dark-border);
+.dock-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
     transition: var(--transition-smooth);
-    white-space: nowrap;
+    border: 1px solid transparent;
 }
-.dock-tab-btn.active {
-    color: #ffffff; background-color: var(--purple-primary);
-    border-color: var(--purple-primary);
+.dock-icon-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.2;
 }
-
-/* Botón compacto de Hablemos abajo */
-.mobile-dock-action-row {
-    display: flex; justify-content: center; align-items: center;
+.dock-icon-btn:hover {
+    color: #ffffff;
+    background-color: var(--dark-card);
 }
-.dock-cta-btn-compact {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem;
-    width: 100%; max-width: 220px;
-    padding: 0.32rem 0.85rem; font-size: 0.7rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.04em;
-    background-color: var(--pink-cute); color: #ffffff;
-    border-radius: var(--radius-pill); cursor: pointer;
-    transition: var(--transition-smooth);
+.dock-icon-btn.active {
+    color: #ffffff;
+    background-color: var(--purple-primary);
+    box-shadow: 0 3px 10px rgba(116, 67, 212, 0.4);
 }
-.dock-cta-btn-compact:hover {
-    background-color: var(--pink-hover);
+.dock-icon-btn-cta {
+    background-color: var(--pink-cute) !important;
+    color: #ffffff !important;
+    box-shadow: 0 3px 10px rgba(234, 100, 216, 0.35);
+}
+.dock-icon-btn-cta:hover {
+    background-color: var(--pink-hover) !important;
 }
 
 /* ============ MODAL SYSTEM ============ */
@@ -885,7 +882,7 @@ body {
 @media (max-width: 920px) {
     .site-top-bar { display: none; }
     .mobile-bottom-dock { display: block; }
-    body { padding-bottom: 90px; }
+    body { padding-bottom: 85px; }
     .hero-container { grid-template-columns: 1fr; padding: 2.5rem 1.2rem; gap: 2.2rem; }
     .hero-right { order: -1; }
     .creator-showcase-card { max-width: 100%; }
@@ -918,7 +915,7 @@ body {
 </head>
 <body>
 
-<!-- ============ DESKTOP STICKY NAVBAR (7 TABS) ============ -->
+<!-- ============ DESKTOP STICKY NAVBAR (7 TEXT TABS) ============ -->
 <header class="site-top-bar">
     <div class="site-top-bar-inner">
         <div onclick="switchTab('tab-inicio')" class="brand-block">
@@ -951,7 +948,7 @@ body {
 </header>
 
 <!-- ========================================================
-     TAB PANELS (SISTEMA DE PESTAÑAS INDEPENDIENTES)
+     TAB PANELS (PANTALLAS SEPARADAS)
      ======================================================== -->
 
 <!-- TAB 1: INICIO -->
@@ -1550,25 +1547,41 @@ body {
     </div>
 </footer>
 
-<!-- ============ COMPACT FLOATING DOCK (MOBILE: 7 TABS + HABLEMOS COMPACTO) ============ -->
+<!-- ============ ULTRA-COMPACT MOBILE FLOATING DOCK (SOLO ÍCONOS A LA VISTA EN 1 FILA) ============ -->
 <div class="mobile-bottom-dock">
-    <div class="mobile-dock-inner">
-        <!-- 7 Pestañas compactas -->
-        <div class="mobile-dock-tabs-row">
-            <button onclick="switchTab('tab-inicio')" class="dock-tab-btn active" data-tab="tab-inicio">Inicio</button>
-            <button onclick="switchTab('tab-casos')" class="dock-tab-btn" data-tab="tab-casos">Casos</button>
-            <button onclick="switchTab('tab-videos')" class="dock-tab-btn" data-tab="tab-videos">Videos</button>
-            <button onclick="switchTab('tab-proceso')" class="dock-tab-btn" data-tab="tab-proceso">Proceso</button>
-            <button onclick="switchTab('tab-servicios')" class="dock-tab-btn" data-tab="tab-servicios">Servicios</button>
-            <button onclick="switchTab('tab-inspiracion')" class="dock-tab-btn" data-tab="tab-inspiracion">Inspiración</button>
-            <button onclick="switchTab('tab-contacto')" class="dock-tab-btn" data-tab="tab-contacto">Contacto</button>
-        </div>
-        <!-- Botón Hablemos compacto y discreto -->
-        <div class="mobile-dock-action-row">
-            <button onclick="openContactModal()" class="dock-cta-btn-compact">
-                <span>💬 Hablemos</span>
-            </button>
-        </div>
+    <div class="mobile-dock-row-icons">
+        <!-- 1. Inicio -->
+        <button onclick="switchTab('tab-inicio')" class="dock-icon-btn active" data-tab="tab-inicio" title="Inicio" aria-label="Inicio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </button>
+        <!-- 2. Casos -->
+        <button onclick="switchTab('tab-casos')" class="dock-icon-btn" data-tab="tab-casos" title="Casos de Éxito" aria-label="Casos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        </button>
+        <!-- 3. Videos -->
+        <button onclick="switchTab('tab-videos')" class="dock-icon-btn" data-tab="tab-videos" title="Videos & TikToks" aria-label="Videos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </button>
+        <!-- 4. Proceso -->
+        <button onclick="switchTab('tab-proceso')" class="dock-icon-btn" data-tab="tab-proceso" title="Mi Proceso" aria-label="Proceso">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6"></path><circle cx="12" cy="12" r="10"></circle></svg>
+        </button>
+        <!-- 5. Servicios -->
+        <button onclick="switchTab('tab-servicios')" class="dock-icon-btn" data-tab="tab-servicios" title="Servicios" aria-label="Servicios">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        </button>
+        <!-- 6. Inspiración -->
+        <button onclick="switchTab('tab-inspiracion')" class="dock-icon-btn" data-tab="tab-inspiracion" title="Inspiración" aria-label="Inspiración">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </button>
+        <!-- 7. Contacto -->
+        <button onclick="switchTab('tab-contacto')" class="dock-icon-btn" data-tab="tab-contacto" title="Contacto" aria-label="Contacto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </button>
+        <!-- 8. Botón Directo Hablemos (Chat) -->
+        <button onclick="openContactModal()" class="dock-icon-btn dock-icon-btn-cta" title="Hablemos" aria-label="Hablemos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </button>
     </div>
 </div>
 
@@ -1681,7 +1694,7 @@ function switchTab(tabId) {
         activePanel.classList.add('active');
     }
 
-    // 3. Actualizar botones activos en Navbar Desktop
+    // 3. Actualizar botones activos en Navbar Desktop (Texto)
     document.querySelectorAll('.nav-tab-pill').forEach(function(btn) {
         if (btn.getAttribute('data-tab') === tabId) {
             btn.classList.add('active');
@@ -1690,12 +1703,10 @@ function switchTab(tabId) {
         }
     });
 
-    // 4. Actualizar botones activos en Dock Mobile
-    document.querySelectorAll('.dock-tab-btn').forEach(function(btn) {
+    // 4. Actualizar botones activos en Dock Mobile (Solo Íconos)
+    document.querySelectorAll('.dock-icon-btn').forEach(function(btn) {
         if (btn.getAttribute('data-tab') === tabId) {
             btn.classList.add('active');
-            // Hacer scroll suave en la barrita para mantener el botón visible
-            btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         } else {
             btn.classList.remove('active');
         }
