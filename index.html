@@ -14,7 +14,6 @@
 <style>
 /* ============ CUTE, SOLID & SEPARATED COLOR PALETTE (NO DEGRADES) ============ */
 :root {
-    /* Solid Brand Colors */
     --purple-primary: #7443d4;
     --purple-hover: #5d2fc2;
     --purple-soft: #f2ebfc;
@@ -30,16 +29,11 @@
     --dark-card: #28223b;
     --dark-border: #383050;
 
-    /* Distinct Section Backgrounds */
-    --bg-hero: #13101c;
-    --bg-brands: #f8f5ee;
-    --bg-about: #ffffff;
+    --bg-page-light: #ffffff;
     --bg-cases: #f5f0fb;
-    --bg-videos: #181424;
-    --bg-process: #ffffff;
     --bg-services: #f2ebfc;
-    --bg-values: #13101c;
     --bg-contact: #faf7f2;
+    --bg-dark-panel: #14111f;
 
     --text-heading: #120f1d;
     --text-body: #3c374d;
@@ -52,11 +46,11 @@
     --radius-lg: 26px;
     --radius-pill: 999px;
 
-    --shadow-cute: 0 6px 20px rgba(116, 67, 212, 0.1);
-    --shadow-hover: 0 10px 28px rgba(116, 67, 212, 0.18);
+    --shadow-cute: 0 6px 20px rgba(116, 67, 212, 0.09);
+    --shadow-hover: 0 10px 28px rgba(116, 67, 212, 0.16);
     --shadow-floating: 0 12px 36px rgba(0, 0, 0, 0.35);
 
-    --transition-smooth: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-smooth: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after {
@@ -67,7 +61,7 @@
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--bg-about);
+    background-color: var(--bg-page-light);
     color: var(--text-body);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
@@ -81,7 +75,7 @@ body {
     top: 0;
     z-index: 2500;
     background-color: var(--dark-main);
-    padding: 0.95rem 2.5rem;
+    padding: 0.85rem 2.5rem;
     border-bottom: 2px solid var(--dark-border);
 }
 .site-top-bar-inner {
@@ -118,7 +112,7 @@ body {
 
 .nav-tab-pill {
     display: inline-flex; align-items: center; justify-content: center;
-    padding: 0.5rem 1.05rem; font-size: 0.78rem; font-weight: 600;
+    padding: 0.5rem 1.05rem; font-size: 0.78rem; font-weight: 700;
     letter-spacing: 0.01em; color: var(--text-dim); background-color: transparent;
     border-radius: var(--radius-pill); cursor: pointer; text-decoration: none;
     transition: var(--transition-smooth);
@@ -136,7 +130,7 @@ body {
 }
 .header-action-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
-    padding: 0.55rem 1.2rem; font-size: 0.72rem; font-weight: 700;
+    padding: 0.52rem 1.15rem; font-size: 0.72rem; font-weight: 700;
     letter-spacing: 0.04em; text-transform: uppercase; border-radius: var(--radius-pill);
     cursor: pointer; transition: var(--transition-smooth); text-decoration: none;
 }
@@ -155,10 +149,25 @@ body {
     background-color: var(--dark-card); border-color: var(--purple-primary);
 }
 
+/* ============ TAB VIEW SYSTEM (PANTALLAS SEPARADAS) ============ */
+.tab-panel {
+    display: none;
+    min-height: calc(100vh - 75px);
+    opacity: 0;
+}
+.tab-panel.active {
+    display: block;
+    animation: tabAppear 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes tabAppear {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* ============ CUTE SOLID BUTTONS ============ */
 .cute-btn-purple {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
-    padding: 0.85rem 1.9rem; font-size: 0.82rem; font-weight: 700;
+    padding: 0.85rem 1.85rem; font-size: 0.82rem; font-weight: 700;
     letter-spacing: 0.04em; text-transform: uppercase; border-radius: var(--radius-pill);
     background-color: var(--purple-primary); color: #ffffff; text-decoration: none;
     transition: var(--transition-smooth); cursor: pointer;
@@ -167,12 +176,11 @@ body {
 .cute-btn-purple:hover {
     background-color: var(--purple-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(116, 67, 212, 0.35);
 }
 
 .cute-btn-pink {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
-    padding: 0.85rem 1.9rem; font-size: 0.82rem; font-weight: 700;
+    padding: 0.85rem 1.85rem; font-size: 0.82rem; font-weight: 700;
     letter-spacing: 0.04em; text-transform: uppercase; border-radius: var(--radius-pill);
     background-color: var(--pink-cute); color: #ffffff; text-decoration: none;
     transition: var(--transition-smooth); cursor: pointer;
@@ -181,12 +189,11 @@ body {
 .cute-btn-pink:hover {
     background-color: var(--pink-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(234, 100, 216, 0.35);
 }
 
 .cute-btn-dark {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
-    padding: 0.85rem 1.8rem; font-size: 0.82rem; font-weight: 600;
+    padding: 0.85rem 1.75rem; font-size: 0.82rem; font-weight: 600;
     letter-spacing: 0.04em; border-radius: var(--radius-pill);
     background-color: var(--dark-surface); color: #ffffff; text-decoration: none;
     border: 1px solid var(--dark-border);
@@ -198,7 +205,7 @@ body {
 
 .cute-btn-light {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
-    padding: 0.85rem 1.8rem; font-size: 0.82rem; font-weight: 700;
+    padding: 0.85rem 1.75rem; font-size: 0.82rem; font-weight: 700;
     letter-spacing: 0.04em; border-radius: var(--radius-pill);
     background-color: #ffffff; color: var(--purple-primary); text-decoration: none;
     border: 1.5px solid var(--purple-border);
@@ -208,17 +215,14 @@ body {
     background-color: var(--purple-soft);
 }
 
-/* ============ HERO SECTION ============ */
+/* ============ TAB 1: INICIO ============ */
 .hero-section {
-    min-height: calc(90vh - 70px);
-    background-color: var(--bg-hero);
-    position: relative;
-    display: flex; align-items: center;
+    background-color: var(--dark-main);
+    padding: 5rem 2.5rem;
     border-bottom: 2px solid var(--dark-border);
 }
 .hero-container {
     max-width: 1350px; margin: 0 auto; width: 100%;
-    padding: 5rem 2.5rem;
     display: grid; grid-template-columns: 1.15fr 0.85fr;
     gap: 4rem; align-items: center;
 }
@@ -286,7 +290,7 @@ body {
     letter-spacing: 0.05em; margin-top: 0.25rem;
 }
 
-/* HERO RIGHT (CREATOR CARD / PORTRAIT VISUAL) */
+/* HERO RIGHT */
 .hero-right {
     position: relative; display: flex; justify-content: center; align-items: center;
 }
@@ -297,8 +301,7 @@ body {
     border-radius: var(--radius-lg);
     padding: 2rem;
     box-shadow: var(--shadow-floating);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
 }
 .creator-avatar-wrap {
     width: 100%; height: 320px; border-radius: var(--radius-md);
@@ -335,11 +338,11 @@ body {
     background-color: var(--purple-primary); transform: translateY(-1px);
 }
 
-/* ============ BRANDS SECTION ============ */
+/* BRANDS SECTION */
 .brands-ticker-section {
     padding: 3.5rem 2rem;
-    background-color: var(--bg-brands);
-    border-bottom: 2px solid #eae3d5;
+    background-color: #faf7f2;
+    border-bottom: 2px solid #ede5d5;
     text-align: center;
 }
 .brands-title-subtle {
@@ -353,56 +356,21 @@ body {
 .brand-item {
     font-size: 1.2rem; font-weight: 800; color: #524b66; letter-spacing: 0.06em;
     text-transform: uppercase; transition: var(--transition-smooth);
-    display: flex; align-items: center; gap: 0.5rem;
 }
 .brand-item:hover {
     color: var(--purple-primary); transform: scale(1.05);
 }
 
-/* ============ SECTION STRUCTURE & DISTINCT HEADINGS ============ */
-.section-wrapper-about {
-    padding: 6.5rem 2.5rem;
-    background-color: var(--bg-about);
-    border-bottom: 2px solid #ede8f5;
-}
-.section-wrapper-cases {
-    padding: 6.5rem 2.5rem;
-    background-color: var(--bg-cases);
-    border-bottom: 2px solid #e2d7f2;
-}
-.section-wrapper-videos {
-    padding: 6.5rem 2.5rem;
-    background-color: var(--bg-videos);
-    color: #ffffff;
-    border-bottom: 2px solid var(--dark-border);
-}
-.section-wrapper-process {
-    padding: 6.5rem 2.5rem;
-    background-color: var(--bg-process);
-    border-bottom: 2px solid #ede8f5;
-}
-.section-wrapper-services {
-    padding: 6.5rem 2.5rem;
-    background-color: var(--bg-services);
-    border-bottom: 2px solid #dcc8f8;
-}
-.section-wrapper-values {
-    padding: 6.5rem 2.5rem;
-    background-color: var(--bg-values);
-    color: #ffffff;
-    border-bottom: 2px solid var(--dark-border);
-}
-.section-wrapper-contact {
-    padding: 6.5rem 2.5rem;
-    background-color: var(--bg-contact);
-}
-
-.section-inner-container {
+/* ============ SECTION CONTAINERS FOR PANELS ============ */
+.panel-section-wrapper {
+    padding: 5.5rem 2.5rem;
     max-width: 1350px; margin: 0 auto;
 }
-
+.panel-section-wrapper.dark-mode {
+    color: #ffffff;
+}
 .section-header-centered {
-    text-align: center; max-width: 780px; margin: 0 auto 4.5rem;
+    text-align: center; max-width: 780px; margin: 0 auto 4rem;
 }
 .section-kicker {
     display: inline-block; font-size: 0.72rem; font-weight: 800;
@@ -427,26 +395,7 @@ body {
 }
 .section-subtitle-text.on-dark { color: #d1cce0; }
 
-/* ============ SOBRE MÍ / TARJETAS ============ */
-.about-pillars-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-}
-.about-pillar-card {
-    background-color: #faf8fd;
-    border: 2px solid var(--purple-border);
-    border-radius: var(--radius-lg);
-    padding: 2.8rem 2.4rem;
-    box-shadow: var(--shadow-cute);
-    transition: var(--transition-smooth);
-}
-.about-pillar-card:hover {
-    transform: translateY(-3px);
-    background-color: #ffffff;
-    box-shadow: var(--shadow-hover);
-}
-
-/* ============ CASOS DE ÉXITO ============ */
+/* ============ TAB 2: CASOS DE ÉXITO ============ */
 .cases-grid {
     display: grid; grid-template-columns: repeat(2, 1fr);
     gap: 2.2rem;
@@ -502,7 +451,7 @@ body {
     border-radius: var(--radius-pill);
 }
 
-/* ============ VIDEOS & TIKTOKS SECTION ============ */
+/* ============ TAB 3: VIDEOS & TIKTOKS ============ */
 .video-filter-bar {
     display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap;
     margin-bottom: 3.5rem;
@@ -599,7 +548,7 @@ body {
 }
 .video-footer-link:hover { color: var(--pink-cute); }
 
-/* ============ MI PROCESO SECTION ============ */
+/* ============ TAB 4: MI PROCESO ============ */
 .process-steps-row {
     display: grid; grid-template-columns: repeat(5, 1fr);
     gap: 1.4rem;
@@ -634,7 +583,7 @@ body {
     font-size: 0.86rem; line-height: 1.6; color: var(--text-body);
 }
 
-/* ============ SERVICIOS SECTION ============ */
+/* ============ TAB 5: SERVICIOS ============ */
 .services-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 2.2rem;
@@ -703,7 +652,7 @@ body {
     background-color: var(--purple-primary); color: #ffffff;
 }
 
-/* ============ LO QUE ME MUEVE / VALORES ============ */
+/* ============ TAB 6: INSPIRACIÓN & VALORES ============ */
 .values-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 2rem; margin-bottom: 3.5rem;
@@ -744,7 +693,7 @@ body {
     color: #ffffff; font-size: 0.78rem; font-weight: 700;
 }
 
-/* ============ CTA CONTACT SECTION (REDISEÑADA & CUTE) ============ */
+/* ============ TAB 7: CONTACTO ============ */
 .cta-box-card {
     background-color: #ffffff;
     border: 3px solid var(--purple-border);
@@ -772,7 +721,7 @@ body {
 /* ============ FOOTER ============ */
 .site-footer {
     background-color: var(--dark-main);
-    padding: 3.5rem 2.5rem;
+    padding: 2.8rem 2.5rem;
     border-top: 2px solid var(--dark-border);
     color: #8b859e; font-size: 0.82rem;
 }
@@ -785,44 +734,67 @@ body {
     font-weight: 700; color: #ffffff; font-size: 0.95rem;
 }
 
-/* ============ CUTE FLOATING DOCK (MOBILE FLOTANTE) ============ */
+/* ============ COMPACT FLOATING DOCK (MOBILE) ============ */
 .mobile-bottom-dock {
     display: none;
     position: fixed;
-    bottom: 16px;
-    left: 16px;
-    right: 16px;
-    max-width: 480px;
-    margin: 0 auto;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 20px);
+    max-width: 440px;
     z-index: 3000;
     background-color: rgba(19, 16, 28, 0.96);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 2px solid var(--dark-border);
-    border-radius: var(--radius-pill);
-    padding: 0.45rem 0.8rem;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+    border: 1.5px solid var(--dark-border);
+    border-radius: 18px;
+    padding: 6px 8px 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
-.mobile-dock-row {
-    display: flex; justify-content: space-around; align-items: center;
+.mobile-dock-inner {
+    display: flex; flex-direction: column; gap: 4px;
 }
-.dock-btn {
-    display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
-    background: transparent; color: var(--text-dim); text-decoration: none;
-    font-size: 0.65rem; font-weight: 700; cursor: pointer; padding: 0.35rem 0.65rem;
-    border-radius: var(--radius-pill); transition: var(--transition-smooth);
+/* 7 Botones compactos uno al lado del otro con scroll suave */
+.mobile-dock-tabs-row {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 4px;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
 }
-.dock-btn svg { width: 19px; height: 19px; }
-.dock-btn.active, .dock-btn:hover {
-    color: #ffffff; background-color: var(--dark-card);
+.mobile-dock-tabs-row::-webkit-scrollbar { display: none; }
+.dock-tab-btn {
+    flex-shrink: 0;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.68rem; font-weight: 700;
+    color: var(--text-dim); background-color: var(--dark-surface);
+    border-radius: var(--radius-pill); cursor: pointer;
+    border: 1px solid var(--dark-border);
+    transition: var(--transition-smooth);
+    white-space: nowrap;
 }
-.dock-btn-cta {
-    background-color: var(--pink-cute) !important;
-    color: #ffffff !important;
-    padding: 0.45rem 1.1rem; border-radius: var(--radius-pill);
+.dock-tab-btn.active {
+    color: #ffffff; background-color: var(--purple-primary);
+    border-color: var(--purple-primary);
 }
-.dock-btn-cta:hover {
-    background-color: var(--pink-hover) !important;
+
+/* Botón compacto de Hablemos abajo */
+.mobile-dock-action-row {
+    display: flex; justify-content: center; align-items: center;
+}
+.dock-cta-btn-compact {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem;
+    width: 100%; max-width: 220px;
+    padding: 0.32rem 0.85rem; font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    background-color: var(--pink-cute); color: #ffffff;
+    border-radius: var(--radius-pill); cursor: pointer;
+    transition: var(--transition-smooth);
+}
+.dock-cta-btn-compact:hover {
+    background-color: var(--pink-hover);
 }
 
 /* ============ MODAL SYSTEM ============ */
@@ -905,7 +877,7 @@ body {
 .pdf-card { background: #f8f6f0; padding: 12px; border-radius: 8px; font-size: 12px; }
 .pdf-card h4 { font-size: 13px; color: #7443d4; margin-bottom: 5px; }
 
-/* ============ RESPONSIVE BREAKPOINTS (MOBILE REFINED) ============ */
+/* ============ RESPONSIVE BREAKPOINTS ============ */
 @media (max-width: 1100px) {
     .videos-grid { grid-template-columns: repeat(2, 1fr); }
     .process-steps-row { grid-template-columns: repeat(3, 1fr); }
@@ -913,50 +885,29 @@ body {
 @media (max-width: 920px) {
     .site-top-bar { display: none; }
     .mobile-bottom-dock { display: block; }
-    body { padding-bottom: 95px; }
-    .hero-container { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2.5rem; }
+    body { padding-bottom: 90px; }
+    .hero-container { grid-template-columns: 1fr; padding: 2.5rem 1.2rem; gap: 2.2rem; }
     .hero-right { order: -1; }
     .creator-showcase-card { max-width: 100%; }
-    .about-pillars-grid { grid-template-columns: 1fr; }
     .cases-grid { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: 1fr; }
     .values-grid { grid-template-columns: 1fr; }
     .process-steps-row { grid-template-columns: 1fr; }
     .passions-banner { flex-direction: column; align-items: flex-start; }
+    .panel-section-wrapper { padding: 3.5rem 1.2rem; }
     
-    .section-wrapper-about, 
-    .section-wrapper-cases, 
-    .section-wrapper-videos, 
-    .section-wrapper-process, 
-    .section-wrapper-services, 
-    .section-wrapper-values, 
-    .section-wrapper-contact { 
-        padding: 4.2rem 1.2rem; 
-    }
-
-    /* REDISEÑO EXCLUSIVO MOBILE PARA "¿CONSTRUIMOS ALGO JUNTOS?" */
     .cta-box-card {
-        padding: 2.5rem 1.4rem;
+        padding: 2.5rem 1.2rem;
         border-radius: 22px;
     }
-    .cta-title-italic {
-        font-size: 2rem;
-        margin-bottom: 0.8rem;
-    }
-    .cta-subtitle {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-    }
+    .cta-title-italic { font-size: 2rem; margin-bottom: 0.8rem; }
+    .cta-subtitle { font-size: 0.95rem; margin-bottom: 1.8rem; }
     .cta-contact-buttons-row {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.8rem;
+        flex-direction: column; width: 100%; gap: 0.8rem;
     }
     .cta-contact-buttons-row a {
-        width: 100%;
-        justify-content: center;
-        padding: 0.9rem 1.2rem;
-        font-size: 0.85rem;
+        width: 100%; justify-content: center;
+        padding: 0.85rem 1.2rem; font-size: 0.82rem;
     }
 }
 @media (max-width: 600px) {
@@ -967,23 +918,23 @@ body {
 </head>
 <body>
 
-<!-- ============ DESKTOP STICKY NAVBAR ============ -->
+<!-- ============ DESKTOP STICKY NAVBAR (7 TABS) ============ -->
 <header class="site-top-bar">
     <div class="site-top-bar-inner">
-        <a href="#inicio" class="brand-block">
+        <div onclick="switchTab('tab-inicio')" class="brand-block">
             <span class="brand-title">AGOS FALCO <span class="brand-dot"></span></span>
             <span class="brand-sub">Content Strategy &amp; Creator</span>
-        </a>
+        </div>
 
         <nav class="tabs-scroll-container">
             <div class="tabs-pill-row">
-                <a href="#inicio" class="nav-tab-pill active">Inicio</a>
-                <a href="#sobre-mi" class="nav-tab-pill">Sobre Mí</a>
-                <a href="#casos" class="nav-tab-pill">Casos de Éxito</a>
-                <a href="#videos" class="nav-tab-pill">Videos &amp; TikToks</a>
-                <a href="#proceso" class="nav-tab-pill">Mi Proceso</a>
-                <a href="#servicios" class="nav-tab-pill">Servicios</a>
-                <a href="#contacto" class="nav-tab-pill">Contacto</a>
+                <button onclick="switchTab('tab-inicio')" class="nav-tab-pill active" data-tab="tab-inicio">Inicio</button>
+                <button onclick="switchTab('tab-casos')" class="nav-tab-pill" data-tab="tab-casos">Casos de Éxito</button>
+                <button onclick="switchTab('tab-videos')" class="nav-tab-pill" data-tab="tab-videos">Videos &amp; TikToks</button>
+                <button onclick="switchTab('tab-proceso')" class="nav-tab-pill" data-tab="tab-proceso">Mi Proceso</button>
+                <button onclick="switchTab('tab-servicios')" class="nav-tab-pill" data-tab="tab-servicios">Servicios</button>
+                <button onclick="switchTab('tab-inspiracion')" class="nav-tab-pill" data-tab="tab-inspiracion">Inspiración</button>
+                <button onclick="switchTab('tab-contacto')" class="nav-tab-pill" data-tab="tab-contacto">Contacto</button>
             </div>
         </nav>
 
@@ -999,129 +950,107 @@ body {
     </div>
 </header>
 
-<!-- ============ HERO SECTION ============ -->
-<section id="inicio" class="hero-section">
-    <div class="hero-container">
-        <div class="hero-left">
-            <div class="hero-badge-pill">
-                <span class="dot"></span> Disponible para Colaboraciones &amp; Estrategia
-            </div>
-            
-            <span class="hero-greeting">holi, soy Agostina</span>
-            <h1 class="hero-main-title">
-                Pensar como marca.<br>
-                <span class="highlight-purple">Crear como creadora.</span>
-            </h1>
+<!-- ========================================================
+     TAB PANELS (SISTEMA DE PESTAÑAS INDEPENDIENTES)
+     ======================================================== -->
 
-            <p class="hero-description">
-                Después de más de <strong>8 años trabajando en marketing</strong> desarrollando estrategias y campañas para <strong>Disney, Marvel, Star Wars y National Geographic</strong>, hoy fusiono esa visión corporativa con la autenticidad del contenido social-first en TikTok.
-            </p>
-
-            <div class="hero-actions-row">
-                <a href="#casos" class="cute-btn-purple">
-                    Ver Estrategias
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-                <a href="#videos" class="cute-btn-dark">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                    Ver Videos &amp; TikToks
-                </a>
-            </div>
-
-            <div class="hero-stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">+8 Años</span>
-                    <span class="stat-label">Experiencia en Marketing</span>
+<!-- TAB 1: INICIO -->
+<main id="tab-inicio" class="tab-panel active">
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-left">
+                <div class="hero-badge-pill">
+                    <span class="dot"></span> Disponible para Colaboraciones &amp; Estrategia
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">Global</span>
-                    <span class="stat-label">Disney, Marvel &amp; NatGeo</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">Social-First</span>
-                    <span class="stat-label">Contenido &amp; UGC Viral</span>
-                </div>
-            </div>
-        </div>
+                
+                <span class="hero-greeting">holi, soy Agostina</span>
+                <h1 class="hero-main-title">
+                    Pensar como marca.<br>
+                    <span class="highlight-purple">Crear como creadora.</span>
+                </h1>
 
-        <div class="hero-right">
-            <div class="creator-showcase-card">
-                <div class="creator-avatar-wrap">
-                    <div class="creator-tiktok-badge">
-                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
-                        @kydahh_
+                <p class="hero-description">
+                    Después de más de <strong>8 años trabajando en marketing</strong> desarrollando estrategias y campañas para <strong>Disney, Marvel, Star Wars y National Geographic</strong>, hoy fusiono esa visión corporativa con la autenticidad del contenido social-first en TikTok.
+                </p>
+
+                <div class="hero-actions-row">
+                    <button onclick="switchTab('tab-casos')" class="cute-btn-purple">
+                        Ver Estrategias
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                    <button onclick="switchTab('tab-videos')" class="cute-btn-dark">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        Ver Videos &amp; TikToks
+                    </button>
+                </div>
+
+                <div class="hero-stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">+8 Años</span>
+                        <span class="stat-label">Experiencia en Marketing</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Global</span>
+                        <span class="stat-label">Disney, Marvel &amp; NatGeo</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Social-First</span>
+                        <span class="stat-label">Contenido &amp; UGC Viral</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="creator-card-info">
-                    <h3>Agostina Falcone</h3>
-                    <p>Content Strategist &amp; TikTok Creator</p>
+            <div class="hero-right">
+                <div class="creator-showcase-card">
+                    <div class="creator-avatar-wrap">
+                        <div class="creator-tiktok-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
+                            @kydahh_
+                        </div>
+                    </div>
+
+                    <div class="creator-card-info">
+                        <h3>Agostina Falcone</h3>
+                        <p>Content Strategist &amp; TikTok Creator</p>
+                    </div>
+
+                    <div class="social-links-pills">
+                        <a href="https://www.tiktok.com/@kydahh_" target="_blank" rel="noopener" class="social-pill-btn">
+                            <span>TikTok</span>
+                        </a>
+                        <a href="https://www.instagram.com/agosfalco/" target="_blank" rel="noopener" class="social-pill-btn">
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/agostinafalcone/" target="_blank" rel="noopener" class="social-pill-btn">
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="mailto:hello.agosfalco@gmail.com" class="social-pill-btn">
+                            <span>Email</span>
+                        </a>
+                    </div>
                 </div>
-
-                <div class="social-links-pills">
-                    <a href="https://www.tiktok.com/@kydahh_" target="_blank" rel="noopener" class="social-pill-btn">
-                        <span>TikTok</span>
-                    </a>
-                    <a href="https://www.instagram.com/agosfalco/" target="_blank" rel="noopener" class="social-pill-btn">
-                        <span>Instagram</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/agostinafalcone/" target="_blank" rel="noopener" class="social-pill-btn">
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="mailto:hello.agosfalco@gmail.com" class="social-pill-btn">
-                        <span>Email</span>
-                    </a>
-                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ============ BRANDS SECTION ============ -->
-<div class="brands-ticker-section">
-    <p class="brands-title-subtle">Marcas y proyectos con los que trabajé</p>
-    <div class="brands-grid">
-        <div class="brand-item">DISNEY</div>
-        <div class="brand-item">MARVEL</div>
-        <div class="brand-item">STAR WARS</div>
-        <div class="brand-item">NATIONAL GEOGRAPHIC</div>
-        <div class="brand-item">SHEIN</div>
-        <div class="brand-item">DISNEY LATAM</div>
-        <div class="brand-item">TOY STORY 30°</div>
-    </div>
-</div>
-
-<!-- ============ SOBRE MÍ ============ -->
-<section id="sobre-mi" class="section-wrapper-about">
-    <div class="section-inner-container">
-        <div class="section-header-centered">
-            <span class="section-kicker">Mi Camino</span>
-            <h2 class="section-main-heading">El puente entre la visión de marca y la mente de la audiencia</h2>
-            <p class="section-subtitle-text">
-                Haber trabajado desde ambos lados me dio una perspectiva que valoro mucho: entender qué necesita una marca para cumplir sus objetivos comerciales, sin perder de vista qué elige consumir la comunidad en redes.
-            </p>
-        </div>
-
-        <div class="about-pillars-grid">
-            <div class="about-pillar-card">
-                <h3 style="font-size: 1.35rem; color: var(--purple-primary); margin-bottom: 0.8rem; font-weight: 800;">🎯 Pensar como marca</h3>
-                <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-body);">
-                    Estrategia basada en insights culturales, consistencia de tono, cumplimiento de KPIs, planificación editorial y visión comercial a largo plazo.
-                </p>
-            </div>
-            <div class="about-pillar-card">
-                <h3 style="font-size: 1.35rem; color: var(--pink-cute); margin-bottom: 0.8rem; font-weight: 800;">✨ Crear como creadora</h3>
-                <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-body);">
-                    Storytelling dinámico, ganchos visuales (hooks), edición nativa para TikTok/Reels, naturalidad frente a cámara y conexión genuina con el feed.
-                </p>
-            </div>
+    <!-- MARCAS -->
+    <div class="brands-ticker-section">
+        <p class="brands-title-subtle">Marcas y proyectos con los que trabajé</p>
+        <div class="brands-grid">
+            <div class="brand-item">DISNEY</div>
+            <div class="brand-item">MARVEL</div>
+            <div class="brand-item">STAR WARS</div>
+            <div class="brand-item">NATIONAL GEOGRAPHIC</div>
+            <div class="brand-item">SHEIN</div>
+            <div class="brand-item">DISNEY LATAM</div>
+            <div class="brand-item">TOY STORY 30°</div>
         </div>
     </div>
-</section>
+</main>
 
-<!-- ============ CASOS DE ÉXITO (ESTRATEGIA EN ACCIÓN) ============ -->
-<section id="casos" class="section-wrapper-cases">
-    <div class="section-inner-container">
+<!-- TAB 2: CASOS DE ÉXITO -->
+<main id="tab-casos" class="tab-panel" style="background-color: var(--bg-cases);">
+    <div class="panel-section-wrapper">
         <div class="section-header-centered">
             <span class="section-kicker">Estrategia en Acción</span>
             <h2 class="section-main-heading">Casos reales desarrollados para marcas globales</h2>
@@ -1292,16 +1221,16 @@ body {
             </article>
         </div>
     </div>
-</section>
+</main>
 
-<!-- ============ VIDEOS & TIKTOK SHOWCASE ============ -->
-<section id="videos" class="section-wrapper-videos">
-    <div class="section-inner-container">
+<!-- TAB 3: VIDEOS & TIKTOKS -->
+<main id="tab-videos" class="tab-panel" style="background-color: var(--bg-dark-panel); color: #ffffff;">
+    <div class="panel-section-wrapper dark-mode">
         <div class="section-header-centered">
             <span class="section-kicker on-dark">Contenido en Acción</span>
             <h2 class="section-main-heading on-dark">Videos, UGC &amp; Colaboraciones en TikTok</h2>
             <p class="section-subtitle-text on-dark">
-                Contenido social-first pensado para integrarse de forma natural al feed. Desde la idea y el guion hasta la edición final, cada video busca entretener, conectar y cumplir un objetivo comercial.
+                Contenido social-first pensado para integrarse de forma natural al feed. Toca cualquier video para reproducirlo al instante.
             </p>
         </div>
 
@@ -1316,7 +1245,7 @@ body {
 
         <!-- GRID DE VIDEOS VERTICALES 9:16 -->
         <div class="videos-grid" id="videosContainer">
-            <!-- VIDEO 1: SHEIN / BRAND -->
+            <!-- VIDEO 1: SHEIN -->
             <div class="video-card-vertical" data-category="brand shein">
                 <div class="video-preview-box">
                     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="SHEIN Collab" class="video-thumbnail">
@@ -1339,7 +1268,7 @@ body {
                 </div>
             </div>
 
-            <!-- VIDEO 2: BRAND COLLAB -->
+            <!-- VIDEO 2: BRAND LOOKBOOK -->
             <div class="video-card-vertical" data-category="brand shein">
                 <div class="video-preview-box">
                     <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80" alt="Brand Collaboration" class="video-thumbnail">
@@ -1362,7 +1291,7 @@ body {
                 </div>
             </div>
 
-            <!-- VIDEO 3: JAPAN TRIP / LIFESTYLE -->
+            <!-- VIDEO 3: JAPAN TRIP -->
             <div class="video-card-vertical" data-category="japan story">
                 <div class="video-preview-box">
                     <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=600&q=80" alt="Japan Trip Vlog" class="video-thumbnail">
@@ -1385,7 +1314,7 @@ body {
                 </div>
             </div>
 
-            <!-- VIDEO 4: STORYTELLING & LIFESTYLE -->
+            <!-- VIDEO 4: STORYTELLING -->
             <div class="video-card-vertical" data-category="story">
                 <div class="video-preview-box">
                     <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Lifestyle & Storytelling" class="video-thumbnail">
@@ -1409,11 +1338,11 @@ body {
             </div>
         </div>
     </div>
-</section>
+</main>
 
-<!-- ============ MI PROCESO: DE LA IDEA AL CONTENIDO ============ -->
-<section id="proceso" class="section-wrapper-process">
-    <div class="section-inner-container">
+<!-- TAB 4: MI PROCESO -->
+<main id="tab-proceso" class="tab-panel">
+    <div class="panel-section-wrapper">
         <div class="section-header-centered">
             <span class="section-kicker">Metodología</span>
             <h2 class="section-main-heading">Mi proceso: De la idea al contenido</h2>
@@ -1455,11 +1384,11 @@ body {
             </div>
         </div>
     </div>
-</section>
+</main>
 
-<!-- ============ SERVICIOS ============ -->
-<section id="servicios" class="section-wrapper-services">
-    <div class="section-inner-container">
+<!-- TAB 5: SERVICIOS -->
+<main id="tab-servicios" class="tab-panel" style="background-color: var(--bg-services);">
+    <div class="panel-section-wrapper">
         <div class="section-header-centered">
             <span class="section-kicker">Lo que puedo hacer</span>
             <h2 class="section-main-heading">Servicios a la medida de marcas y proyectos</h2>
@@ -1533,11 +1462,11 @@ body {
             </div>
         </div>
     </div>
-</section>
+</main>
 
-<!-- ============ LO QUE ME MUEVE & ME INSPIRA ============ -->
-<section class="section-wrapper-values">
-    <div class="section-inner-container">
+<!-- TAB 6: INSPIRACIÓN & VALORES -->
+<main id="tab-inspiracion" class="tab-panel" style="background-color: var(--dark-main); color: #ffffff;">
+    <div class="panel-section-wrapper dark-mode">
         <div class="section-header-centered">
             <span class="section-kicker on-dark">Valores &amp; Visión</span>
             <h2 class="section-main-heading on-dark">Lo que me mueve</h2>
@@ -1575,11 +1504,11 @@ body {
             </div>
         </div>
     </div>
-</section>
+</main>
 
-<!-- ============ CONTACTO / CTA SECTION (REDISEÑADA & CUTE) ============ -->
-<section id="contacto" class="section-wrapper-contact">
-    <div class="section-inner-container">
+<!-- TAB 7: CONTACTO -->
+<main id="tab-contacto" class="tab-panel" style="background-color: var(--bg-contact);">
+    <div class="panel-section-wrapper">
         <div class="cta-box-card">
             <span class="section-kicker" style="margin-bottom: 1.2rem;">Hablemos</span>
             <h2 class="cta-title-italic">¿Construimos algo juntos?</h2>
@@ -1604,7 +1533,7 @@ body {
             </div>
         </div>
     </div>
-</section>
+</main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
@@ -1621,28 +1550,25 @@ body {
     </div>
 </footer>
 
-<!-- ============ CUTE FLOATING DOCK (MOBILE FLOTANTE) ============ -->
+<!-- ============ COMPACT FLOATING DOCK (MOBILE: 7 TABS + HABLEMOS COMPACTO) ============ -->
 <div class="mobile-bottom-dock">
-    <div class="mobile-dock-row">
-        <a href="#inicio" class="dock-btn active">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            <span>Inicio</span>
-        </a>
-        <a href="#casos" class="dock-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <span>Casos</span>
-        </a>
-        <a href="#videos" class="dock-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            <span>Videos</span>
-        </a>
-        <a href="#servicios" class="dock-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-            <span>Servicios</span>
-        </a>
-        <button onclick="openContactModal()" class="dock-btn dock-btn-cta">
-            <span>Hablemos</span>
-        </button>
+    <div class="mobile-dock-inner">
+        <!-- 7 Pestañas compactas -->
+        <div class="mobile-dock-tabs-row">
+            <button onclick="switchTab('tab-inicio')" class="dock-tab-btn active" data-tab="tab-inicio">Inicio</button>
+            <button onclick="switchTab('tab-casos')" class="dock-tab-btn" data-tab="tab-casos">Casos</button>
+            <button onclick="switchTab('tab-videos')" class="dock-tab-btn" data-tab="tab-videos">Videos</button>
+            <button onclick="switchTab('tab-proceso')" class="dock-tab-btn" data-tab="tab-proceso">Proceso</button>
+            <button onclick="switchTab('tab-servicios')" class="dock-tab-btn" data-tab="tab-servicios">Servicios</button>
+            <button onclick="switchTab('tab-inspiracion')" class="dock-tab-btn" data-tab="tab-inspiracion">Inspiración</button>
+            <button onclick="switchTab('tab-contacto')" class="dock-tab-btn" data-tab="tab-contacto">Contacto</button>
+        </div>
+        <!-- Botón Hablemos compacto y discreto -->
+        <div class="mobile-dock-action-row">
+            <button onclick="openContactModal()" class="dock-cta-btn-compact">
+                <span>💬 Hablemos</span>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -1740,6 +1666,45 @@ body {
 </div>
 
 <script>
+/* ========================================================
+   SISTEMA DE PESTAÑAS (TAB SWITCHER SPA)
+   ======================================================== */
+function switchTab(tabId) {
+    // 1. Ocultar todos los paneles
+    document.querySelectorAll('.tab-panel').forEach(function(panel) {
+        panel.classList.remove('active');
+    });
+
+    // 2. Mostrar el panel seleccionado
+    var activePanel = document.getElementById(tabId);
+    if (activePanel) {
+        activePanel.classList.add('active');
+    }
+
+    // 3. Actualizar botones activos en Navbar Desktop
+    document.querySelectorAll('.nav-tab-pill').forEach(function(btn) {
+        if (btn.getAttribute('data-tab') === tabId) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // 4. Actualizar botones activos en Dock Mobile
+    document.querySelectorAll('.dock-tab-btn').forEach(function(btn) {
+        if (btn.getAttribute('data-tab') === tabId) {
+            btn.classList.add('active');
+            // Hacer scroll suave en la barrita para mantener el botón visible
+            btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // 5. Ir arriba instantáneamente para lectura cómoda
+    window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
 /* ========================================================
    MODAL CONTROLLERS & INTERACTIONS
    ======================================================== */
@@ -1854,7 +1819,7 @@ function triggerToast(msg) {
 }
 
 /* ========================================================
-   KEYBOARD ESCAPE LISTENER & ACTIVE SCROLL PILLS
+   KEYBOARD ESCAPE LISTENER
    ======================================================== */
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
@@ -1862,27 +1827,6 @@ document.addEventListener('keydown', function(e) {
         closeDownloadModal();
         closeVideoModal();
     }
-});
-
-window.addEventListener('scroll', function() {
-    var sections = ['inicio', 'sobre-mi', 'casos', 'videos', 'proceso', 'servicios', 'contacto'];
-    var scrollPos = window.scrollY + 120;
-
-    sections.forEach(function(sectionId) {
-        var el = document.getElementById(sectionId);
-        if (el) {
-            var top = el.offsetTop;
-            var height = el.offsetHeight;
-            if (scrollPos >= top && scrollPos < top + height) {
-                document.querySelectorAll('.nav-tab-pill').forEach(function(pill) {
-                    pill.classList.remove('active');
-                    if (pill.getAttribute('href') === '#' + sectionId) {
-                        pill.classList.add('active');
-                    }
-                });
-            }
-        }
-    });
 });
 </script>
 </body>
