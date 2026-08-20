@@ -704,7 +704,7 @@ body {
     font-weight: 700; color: #ffffff; font-size: 0.95rem;
 }
 
-/* ============ ULTRA-COMPACT MOBILE FLOATING DOCK ============ */
+/* ============ ULTRA-COMPACT MOBILE FLOATING DOCK (7 TABS CON CONTACTO DIRECTO) ============ */
 .mobile-bottom-dock {
     display: none;
     position: fixed;
@@ -712,7 +712,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 24px);
-    max-width: 390px;
+    max-width: 380px;
     z-index: 3000;
     background-color: rgba(12, 9, 21, 0.96);
     backdrop-filter: blur(16px);
@@ -732,8 +732,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: transparent;
     color: var(--text-dim);
@@ -755,13 +755,14 @@ body {
     background-color: var(--violet-primary);
     box-shadow: 0 3px 10px rgba(121, 67, 224, 0.45);
 }
-.dock-icon-btn-cta {
-    background-color: var(--violet-bright) !important;
-    color: var(--dark-main) !important;
+/* Botón Contacto directo destacado en la barra flotante */
+.dock-icon-btn-contact-highlight {
+    background-color: var(--violet-bright);
+    color: var(--dark-main);
     box-shadow: 0 3px 10px rgba(196, 153, 255, 0.4);
 }
-.dock-icon-btn-cta:hover {
-    background-color: #d7b5ff !important;
+.dock-icon-btn-contact-highlight:hover {
+    background-color: #d7b5ff;
 }
 
 /* ============ MODAL SYSTEM ============ */
@@ -854,7 +855,7 @@ body {
     .mobile-bottom-dock { display: block; }
     body { padding-bottom: 85px; }
 
-    /* MOBILE HERO SOBRIO & EDITORIAL */
+    /* MOBILE HERO SOBRIO */
     .hero-editorial-section { padding: 2.2rem 1.25rem 3rem; }
     .hero-editorial-grid {
         grid-template-columns: 1fr;
@@ -879,11 +880,15 @@ body {
     .hero-tagline-quote { font-size: 1.35rem; margin-bottom: 1.3rem; padding-left: 1rem; }
     .hero-bio-summary { font-size: 0.94rem; line-height: 1.7; margin-bottom: 1.8rem; }
 
+    /* En mobile, solo el botón principal a Casos de éxito (sin botón redundante de hablemos) */
     .hero-cta-group {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; width: 100%;
+        display: flex; width: 100%;
     }
-    .hero-cta-group button {
-        width: 100%; padding: 0.85rem 0.5rem; font-size: 0.82rem; gap: 0.35rem;
+    .hero-cta-group .btn-editorial-primary {
+        width: 100%; padding: 0.9rem 1.2rem; font-size: 0.9rem; justify-content: center;
+    }
+    .hero-cta-group .btn-editorial-secondary {
+        display: none; /* Oculto en mobile para evitar redundancia */
     }
 
     .cases-grid { grid-template-columns: 1fr; }
@@ -1515,7 +1520,7 @@ body {
     </div>
 </footer>
 
-<!-- ============ ULTRA-COMPACT MOBILE FLOATING DOCK ============ -->
+<!-- ============ ULTRA-COMPACT MOBILE FLOATING DOCK (7 TABS CON CONTACTO DESTACADO) ============ -->
 <div class="mobile-bottom-dock">
     <div class="mobile-dock-row-icons">
         <!-- 1. Inicio -->
@@ -1542,13 +1547,9 @@ body {
         <button onclick="switchTab('tab-inspiracion')" class="dock-icon-btn" data-tab="tab-inspiracion" title="Inspiración" aria-label="Inspiración">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
         </button>
-        <!-- 7. Contacto -->
-        <button onclick="switchTab('tab-contacto')" class="dock-icon-btn" data-tab="tab-contacto" title="Contacto" aria-label="Contacto">
+        <!-- 7. Contacto Directo destacado -->
+        <button onclick="switchTab('tab-contacto')" class="dock-icon-btn dock-icon-btn-contact-highlight" data-tab="tab-contacto" title="Contacto directo" aria-label="Contacto directo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </button>
-        <!-- 8. Botón Directo Hablemos (Chat) -->
-        <button onclick="openContactModal()" class="dock-icon-btn dock-icon-btn-cta" title="Hablemos" aria-label="Hablemos">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
         </button>
     </div>
 </div>
