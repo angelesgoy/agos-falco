@@ -237,66 +237,51 @@ body {
     gap: 4rem; align-items: center;
 }
 
-/* MOBILE CREATOR PILL HEADER (Solo visible en mobile) */
-.mobile-creator-header {
-    display: none;
-    align-items: center;
-    gap: 1rem;
-    background-color: var(--dark-surface);
-    border: 1.5px solid var(--dark-border);
-    border-radius: 20px;
-    padding: 0.85rem 1.1rem;
-    margin-bottom: 1.5rem;
-    width: 100%;
-}
-.mobile-creator-avatar {
-    width: 68px; height: 68px;
-    border-radius: 50%;
-    background: url('agos.webp') center 20%/cover no-repeat;
-    border: 2px solid var(--violet-bright);
-    flex-shrink: 0;
-}
-.mobile-creator-text {
-    display: flex; flex-direction: column; gap: 0.2rem;
-}
-.mobile-creator-name {
-    font-size: 1.15rem; font-weight: 800; color: #ffffff; line-height: 1.2;
-}
-.mobile-creator-role {
-    font-size: 0.76rem; font-weight: 700; color: var(--violet-bright); line-height: 1.2;
-}
-.mobile-status-badge {
-    display: inline-flex; align-items: center; gap: 0.35rem;
-    font-size: 0.68rem; font-weight: 600; color: #dcd3f5;
-    margin-top: 0.15rem;
-}
-.mobile-status-badge .dot {
-    width: 7px; height: 7px; border-radius: 50%; background-color: #10b981;
-}
-
 .hero-left {
     display: flex; flex-direction: column; align-items: flex-start;
 }
+
+/* OPCIÓN 3: CABECERA EDITORIAL CON AVATAR INTEGRADO */
+.hero-top-editorial-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.4rem;
+}
+.hero-greeting-wrap {
+    display: flex; flex-direction: column;
+}
+.hero-greeting {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.1rem, 3.8vw, 3.2rem);
+    font-style: italic;
+    font-weight: 600;
+    color: var(--violet-bright);
+    line-height: 1.15;
+}
+.hero-inline-avatar {
+    display: none; /* En desktop se usa la tarjeta derecha */
+    width: 62px; height: 62px;
+    border-radius: 50%;
+    background: url('agos.webp') center 20%/cover no-repeat;
+    border: 2.5px solid var(--violet-bright);
+    box-shadow: 0 4px 16px rgba(121, 67, 224, 0.4);
+    flex-shrink: 0;
+}
+
 .hero-badge-pill {
     display: inline-flex; align-items: center; gap: 0.5rem;
     padding: 0.45rem 1.15rem; border-radius: var(--radius-pill);
     background-color: var(--dark-surface); border: 1.5px solid var(--violet-bright);
     color: #ffffff; font-size: 0.78rem; font-weight: 700;
     text-transform: none; /* Mayúscula inicial */
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.4rem;
 }
 .hero-badge-pill span.dot {
     width: 8px; height: 8px; border-radius: 50%; background-color: #10b981;
 }
-.hero-greeting {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-style: italic;
-    font-weight: 600;
-    color: var(--violet-bright);
-    line-height: 1.15;
-    margin-bottom: 0.3rem;
-}
+
 .hero-main-title {
     font-size: clamp(2.3rem, 4.5vw, 4.2rem);
     font-weight: 800;
@@ -944,35 +929,38 @@ body {
     .mobile-bottom-dock { display: block; }
     body { padding-bottom: 85px; }
 
-    /* MOBILE HERO REESTRUCTURADO (OPCIÓN 1: STORY / CREATOR PILL) */
-    .hero-section { padding: 2rem 1.25rem 2.5rem; }
+    /* MOBILE HERO REESTRUCTURADO (OPCIÓN 3: EDITORIAL & DIRECTO AL GRANO) */
+    .hero-section { padding: 2.2rem 1.25rem 2.8rem; }
     .hero-container { grid-template-columns: 1fr; gap: 0; }
-    .hero-right { display: none; } /* Ocultar card duplicada */
+    .hero-right { display: none; } /* Ocultar card pesada */
     
-    .mobile-creator-header { display: flex; } /* Mostrar pill integrada arriba */
-    .hero-badge-pill { display: none; } /* Reemplazado por el status badge del pill */
+    .hero-inline-avatar { display: block; } /* Mostrar avatar sutil junto al saludo */
 
-    .hero-greeting { font-size: 1.65rem; margin-bottom: 0.2rem; }
-    .hero-main-title { font-size: 2rem; margin-bottom: 1rem; line-height: 1.15; }
-    .hero-description { font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.4rem; }
+    .hero-badge-pill {
+        margin-bottom: 1.2rem;
+        padding: 0.35rem 0.95rem; font-size: 0.72rem;
+    }
+    .hero-greeting { font-size: 1.85rem; line-height: 1.15; }
+    .hero-main-title { font-size: 2.15rem; margin-bottom: 1.1rem; line-height: 1.12; }
+    .hero-description { font-size: 0.94rem; line-height: 1.65; margin-bottom: 1.5rem; }
 
-    .social-links-pills { margin-bottom: 1.4rem; gap: 0.4rem; }
+    .social-links-pills { margin-bottom: 1.6rem; gap: 0.4rem; }
     .social-pill-btn { padding: 0.38rem 0.8rem; font-size: 0.72rem; }
 
     .hero-actions-row {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 1.8rem;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-bottom: 2rem;
     }
     .hero-actions-row button {
-        width: 100%; padding: 0.75rem 0.5rem; font-size: 0.78rem; gap: 0.35rem;
+        width: 100%; padding: 0.8rem 0.5rem; font-size: 0.8rem; gap: 0.35rem;
     }
 
     .hero-stats-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem; padding-top: 1.2rem;
+        gap: 0.6rem; padding-top: 1.4rem;
         text-align: center;
     }
-    .stat-number { font-size: 1.25rem; }
-    .stat-label { font-size: 0.65rem; line-height: 1.25; margin-top: 0.15rem; }
+    .stat-number { font-size: 1.3rem; }
+    .stat-label { font-size: 0.66rem; line-height: 1.25; margin-top: 0.15rem; }
 
     .cases-grid { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: 1fr; }
@@ -1043,21 +1031,19 @@ body {
     <section class="hero-section">
         <div class="hero-container">
             <div class="hero-left">
-                <!-- CABECERA COMPACTA MOBILE (OPCIÓN 1: STORY / CREATOR PILL) -->
-                <div class="mobile-creator-header">
-                    <div class="mobile-creator-avatar"></div>
-                    <div class="mobile-creator-text">
-                        <span class="mobile-creator-name">Agostina Falcone</span>
-                        <span class="mobile-creator-role">Content Strategist • @kydahh_</span>
-                        <span class="mobile-status-badge"><span class="dot"></span> Disponible para proyectos</span>
-                    </div>
-                </div>
-
+                <!-- BADGE DISPONIBILIDAD -->
                 <div class="hero-badge-pill">
-                    <span class="dot"></span> Disponible para colaboraciones y estrategia
+                    <span class="dot"></span> Disponible para proyectos y consultoría
                 </div>
                 
-                <span class="hero-greeting">holi, soy Agostina</span>
+                <!-- SALUDO EDITORIAL + FOTO CIRCULAR INTEGRADA AL LADO (OPCIÓN 3) -->
+                <div class="hero-top-editorial-row">
+                    <div class="hero-greeting-wrap">
+                        <span class="hero-greeting">holi, soy Agostina</span>
+                    </div>
+                    <div class="hero-inline-avatar" title="Agostina Falcone"></div>
+                </div>
+
                 <h1 class="hero-main-title">
                     Pensar como marca.<br>
                     <span class="highlight-violet">Crear como creadora.</span>
@@ -1932,9 +1918,7 @@ function generateMediaKitPDF() {
     });
 }
 
-/* ========================================================
-   TOAST NOTIFICATIONS
-   ======================================================== */
+/* ============ TOAST NOTIFICATIONS ============ */
 function triggerToast(msg) {
     var t = document.getElementById('appToast');
     if (!t) return;
@@ -1943,9 +1927,7 @@ function triggerToast(msg) {
     setTimeout(function() { t.classList.remove('show'); }, 3500);
 }
 
-/* ========================================================
-   KEYBOARD ESCAPE LISTENER
-   ======================================================== */
+/* ============ KEYBOARD ESCAPE LISTENER ============ */
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeContactModal();
