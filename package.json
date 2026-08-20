@@ -1,0 +1,20 @@
+{
+  "name": "agos-falco-portfolio",
+  "version": "1.0.0",
+  "description": "Sitio web y Media Kit interactivo para Agostina Falcone (Agos Falco) - Content Strategy & TikTok Creator",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "portfolio",
+    "media-kit",
+    "tiktok",
+    "content-strategy",
+    "influencer",
+    "agos-falco"
+  ],
+  "author": "Agostina Falcone",
+  "license": "MIT"
+}
