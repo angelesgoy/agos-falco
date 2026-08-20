@@ -77,9 +77,12 @@ body {
     position: sticky;
     top: 0;
     z-index: 2500;
-    background-color: var(--dark-main);
+    background-color: rgba(12, 9, 21, 0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     padding: 0.9rem 2.5rem;
     border-bottom: 1.5px solid var(--dark-border);
+    transition: var(--transition-smooth);
 }
 .site-top-bar-inner {
     max-width: 1350px; margin: 0 auto;
@@ -155,21 +158,6 @@ body {
     background-color: var(--dark-card); border-color: var(--violet-primary);
 }
 
-/* ============ TAB VIEW SYSTEM (PANTALLAS SEPARADAS) ============ */
-.tab-panel {
-    display: none;
-    min-height: calc(100vh - 75px);
-    opacity: 0;
-}
-.tab-panel.active {
-    display: block;
-    animation: tabAppear 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-@keyframes tabAppear {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 /* ============ BOTONES SOBRIOS (MAYÚSCULA INICIAL) ============ */
 .btn-editorial-primary {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
@@ -206,6 +194,121 @@ body {
 }
 .btn-editorial-outline-light:hover {
     background-color: var(--violet-soft-bg);
+}
+
+/* ========================================================
+   FULL SCROLL EN WEB (DESKTOP) + SPA TABS EN MOBILE
+   ======================================================== */
+@media (min-width: 921px) {
+    .tab-panel {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        scroll-margin-top: 75px; /* Offset para sticky header */
+        position: relative;
+    }
+}
+@media (max-width: 920px) {
+    .tab-panel {
+        display: none;
+        min-height: calc(100vh - 75px);
+        opacity: 0;
+    }
+    .tab-panel.active {
+        display: block;
+        animation: tabAppear 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes tabAppear {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+}
+
+/* ========================================================
+   ANIMACIONES DE SCROLL EDITORIALES CON SENTIDO (DESKTOP)
+   ======================================================== */
+.reveal-on-scroll {
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+/* 1. Casos de Éxito: Deslizamiento vertical escalonado */
+.case-card.reveal-on-scroll {
+    transform: translateY(40px);
+}
+.case-card.reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+.cases-grid .case-card:nth-child(2) { transition-delay: 0.12s; }
+.cases-grid .case-card:nth-child(3) { transition-delay: 0.22s; }
+.cases-grid .case-card:nth-child(4) { transition-delay: 0.32s; }
+
+/* 2. Videos: Elevación con escala suave */
+.video-card-vertical.reveal-on-scroll {
+    transform: translateY(35px) scale(0.97);
+}
+.video-card-vertical.reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.videos-grid .video-card-vertical:nth-child(1) { transition-delay: 0.05s; }
+.videos-grid .video-card-vertical:nth-child(2) { transition-delay: 0.15s; }
+.videos-grid .video-card-vertical:nth-child(3) { transition-delay: 0.25s; }
+.videos-grid .video-card-vertical:nth-child(4) { transition-delay: 0.35s; }
+
+/* 3. Mi Proceso: Cascada cronológica de pasos 01 -> 05 */
+.process-step-card.reveal-on-scroll {
+    transform: translateY(30px) scale(0.96);
+}
+.process-step-card.reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.process-steps-row .process-step-card:nth-child(1) { transition-delay: 0.06s; }
+.process-steps-row .process-step-card:nth-child(2) { transition-delay: 0.18s; }
+.process-steps-row .process-step-card:nth-child(3) { transition-delay: 0.30s; }
+.process-steps-row .process-step-card:nth-child(4) { transition-delay: 0.42s; }
+.process-steps-row .process-step-card:nth-child(5) { transition-delay: 0.54s; }
+
+/* 4. Servicios: Entrada de columnas con destaque en el central */
+.service-box-card.reveal-on-scroll {
+    transform: translateY(40px);
+}
+.service-box-card.reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+.services-grid .service-box-card:nth-child(2) { transition-delay: 0.15s; }
+.services-grid .service-box-card:nth-child(3) { transition-delay: 0.30s; }
+
+/* 5. Inspiración & Valores: Revelación lateral */
+.value-card.reveal-on-scroll {
+    transform: translateY(30px);
+}
+.value-card.reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+.values-grid .value-card:nth-child(2) { transition-delay: 0.15s; }
+.values-grid .value-card:nth-child(3) { transition-delay: 0.30s; }
+
+.passions-banner.reveal-on-scroll {
+    transform: translateY(25px);
+}
+.passions-banner.reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 6. Contacto: Entrada con enfoque */
+.cta-box-card.reveal-on-scroll {
+    transform: scale(0.97) translateY(30px);
+}
+.cta-box-card.reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: scale(1) translateY(0);
 }
 
 /* ============ TAB 1: INICIO (HERO SOBRIO & EDITORIAL) ============ */
@@ -922,20 +1025,20 @@ body {
 <!-- ============ DESKTOP STICKY NAVBAR ============ -->
 <header class="site-top-bar">
     <div class="site-top-bar-inner">
-        <div onclick="switchTab('tab-inicio')" class="brand-block">
+        <div onclick="navigateToSection('tab-inicio')" class="brand-block">
             <span class="brand-title">Agostina Falcone <span class="brand-dot"></span></span>
             <span class="brand-sub">Content Strategy &amp; Creative Direction</span>
         </div>
 
         <nav class="tabs-scroll-container">
             <div class="tabs-pill-row">
-                <button onclick="switchTab('tab-inicio')" class="nav-tab-pill active" data-tab="tab-inicio">Inicio</button>
-                <button onclick="switchTab('tab-casos')" class="nav-tab-pill" data-tab="tab-casos">Casos de éxito</button>
-                <button onclick="switchTab('tab-videos')" class="nav-tab-pill" data-tab="tab-videos">Videos &amp; TikToks</button>
-                <button onclick="switchTab('tab-proceso')" class="nav-tab-pill" data-tab="tab-proceso">Mi proceso</button>
-                <button onclick="switchTab('tab-servicios')" class="nav-tab-pill" data-tab="tab-servicios">Servicios</button>
-                <button onclick="switchTab('tab-inspiracion')" class="nav-tab-pill" data-tab="tab-inspiracion">Inspiración</button>
-                <button onclick="switchTab('tab-contacto')" class="nav-tab-pill" data-tab="tab-contacto">Contacto</button>
+                <button onclick="navigateToSection('tab-inicio')" class="nav-tab-pill active" data-tab="tab-inicio">Inicio</button>
+                <button onclick="navigateToSection('tab-casos')" class="nav-tab-pill" data-tab="tab-casos">Casos de éxito</button>
+                <button onclick="navigateToSection('tab-videos')" class="nav-tab-pill" data-tab="tab-videos">Videos &amp; TikToks</button>
+                <button onclick="navigateToSection('tab-proceso')" class="nav-tab-pill" data-tab="tab-proceso">Mi proceso</button>
+                <button onclick="navigateToSection('tab-servicios')" class="nav-tab-pill" data-tab="tab-servicios">Servicios</button>
+                <button onclick="navigateToSection('tab-inspiracion')" class="nav-tab-pill" data-tab="tab-inspiracion">Inspiración</button>
+                <button onclick="navigateToSection('tab-contacto')" class="nav-tab-pill" data-tab="tab-contacto">Contacto</button>
             </div>
         </nav>
 
@@ -952,12 +1055,12 @@ body {
 </header>
 
 <!-- ========================================================
-     TAB PANELS (PANTALLAS SEPARADAS)
+     SECCIONES (FULL SCROLL CONTINUO EN WEB + TABS SPA EN MOBILE)
      ======================================================== -->
 
-<!-- TAB 1: INICIO (HERO SOBRIO & EDITORIAL) -->
-<main id="tab-inicio" class="tab-panel active">
-    <section class="hero-editorial-section">
+<!-- SECCIÓN 1: INICIO (HERO SOBRIO & EDITORIAL) -->
+<section id="tab-inicio" class="tab-panel active">
+    <div class="hero-editorial-section">
         <div class="hero-editorial-grid">
             <!-- COLUMNA IZQUIERDA: TEXTO EDITORIAL -->
             <div class="hero-editorial-left">
@@ -973,7 +1076,7 @@ body {
                 </p>
 
                 <div class="hero-cta-group">
-                    <button onclick="switchTab('tab-casos')" class="btn-editorial-primary">
+                    <button onclick="navigateToSection('tab-casos')" class="btn-editorial-primary">
                         Ver casos de éxito
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </button>
@@ -1001,7 +1104,7 @@ body {
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- MARCAS SOBRIAS -->
     <div class="brands-ticker-section">
@@ -1016,10 +1119,10 @@ body {
             <div class="brand-item">TOY STORY 30°</div>
         </div>
     </div>
-</main>
+</section>
 
-<!-- TAB 2: CASOS DE ÉXITO -->
-<main id="tab-casos" class="tab-panel" style="background-color: var(--violet-cases-bg);">
+<!-- SECCIÓN 2: CASOS DE ÉXITO -->
+<section id="tab-casos" class="tab-panel" style="background-color: var(--violet-cases-bg);">
     <div class="panel-section-wrapper">
         <div class="section-header-centered">
             <span class="section-kicker">Estrategia en acción</span>
@@ -1031,7 +1134,7 @@ body {
 
         <div class="cases-grid">
             <!-- CASO 01 -->
-            <article class="case-card">
+            <article class="case-card reveal-on-scroll">
                 <div class="case-card-top">
                     <span class="case-brand-tag">Always-On Content</span>
                     <span class="case-num">01</span>
@@ -1071,7 +1174,7 @@ body {
             </article>
 
             <!-- CASO 02 -->
-            <article class="case-card">
+            <article class="case-card reveal-on-scroll">
                 <div class="case-card-top">
                     <span class="case-brand-tag">Star Wars</span>
                     <span class="case-num">02</span>
@@ -1111,7 +1214,7 @@ body {
             </article>
 
             <!-- CASO 03 -->
-            <article class="case-card">
+            <article class="case-card reveal-on-scroll">
                 <div class="case-card-top">
                     <span class="case-brand-tag">Toy Story</span>
                     <span class="case-num">03</span>
@@ -1151,7 +1254,7 @@ body {
             </article>
 
             <!-- CASO 04 -->
-            <article class="case-card">
+            <article class="case-card reveal-on-scroll">
                 <div class="case-card-top">
                     <span class="case-brand-tag">Disney LATAM</span>
                     <span class="case-num">04</span>
@@ -1191,10 +1294,10 @@ body {
             </article>
         </div>
     </div>
-</main>
+</section>
 
-<!-- TAB 3: VIDEOS & TIKTOKS -->
-<main id="tab-videos" class="tab-panel" style="background-color: var(--dark-main); color: #ffffff;">
+<!-- SECCIÓN 3: VIDEOS & TIKTOKS -->
+<section id="tab-videos" class="tab-panel" style="background-color: var(--dark-main); color: #ffffff;">
     <div class="panel-section-wrapper dark-mode">
         <div class="section-header-centered">
             <span class="section-kicker on-dark">Contenido en acción</span>
@@ -1216,7 +1319,7 @@ body {
         <!-- GRID DE VIDEOS VERTICALES 9:16 -->
         <div class="videos-grid" id="videosContainer">
             <!-- VIDEO 1: SHEIN -->
-            <div class="video-card-vertical" data-category="brand shein">
+            <div class="video-card-vertical reveal-on-scroll" data-category="brand shein">
                 <div class="video-preview-box">
                     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="SHEIN Collab" class="video-thumbnail">
                     <div class="video-overlay-tint">
@@ -1239,7 +1342,7 @@ body {
             </div>
 
             <!-- VIDEO 2: BRAND LOOKBOOK -->
-            <div class="video-card-vertical" data-category="brand shein">
+            <div class="video-card-vertical reveal-on-scroll" data-category="brand shein">
                 <div class="video-preview-box">
                     <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80" alt="Brand Collaboration" class="video-thumbnail">
                     <div class="video-overlay-tint">
@@ -1262,7 +1365,7 @@ body {
             </div>
 
             <!-- VIDEO 3: JAPAN TRIP -->
-            <div class="video-card-vertical" data-category="japan story">
+            <div class="video-card-vertical reveal-on-scroll" data-category="japan story">
                 <div class="video-preview-box">
                     <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=600&q=80" alt="Japan Trip Vlog" class="video-thumbnail">
                     <div class="video-overlay-tint">
@@ -1285,7 +1388,7 @@ body {
             </div>
 
             <!-- VIDEO 4: STORYTELLING -->
-            <div class="video-card-vertical" data-category="story">
+            <div class="video-card-vertical reveal-on-scroll" data-category="story">
                 <div class="video-preview-box">
                     <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Lifestyle & Storytelling" class="video-thumbnail">
                     <div class="video-overlay-tint">
@@ -1308,10 +1411,10 @@ body {
             </div>
         </div>
     </div>
-</main>
+</section>
 
-<!-- TAB 4: MI PROCESO -->
-<main id="tab-proceso" class="tab-panel">
+<!-- SECCIÓN 4: MI PROCESO -->
+<section id="tab-proceso" class="tab-panel">
     <div class="panel-section-wrapper">
         <div class="section-header-centered">
             <span class="section-kicker">Metodología</span>
@@ -1323,41 +1426,41 @@ body {
 
         <div class="process-steps-row">
             <!-- 01 -->
-            <div class="process-step-card">
+            <div class="process-step-card reveal-on-scroll">
                 <div class="process-num-badge">01</div>
                 <h3 class="process-step-title">Descubrir</h3>
                 <p class="process-step-desc">Investigo la marca, su audiencia, los objetivos comerciales y el contexto digital para identificar oportunidades reales.</p>
             </div>
             <!-- 02 -->
-            <div class="process-step-card">
+            <div class="process-step-card reveal-on-scroll">
                 <div class="process-num-badge">02</div>
                 <h3 class="process-step-title">Definir</h3>
                 <p class="process-step-desc">Traduzco esos insights en una dirección clara: objetivos, pilares de contenido, tono de comunicación y formatos.</p>
             </div>
             <!-- 03 -->
-            <div class="process-step-card">
+            <div class="process-step-card reveal-on-scroll">
                 <div class="process-num-badge">03</div>
                 <h3 class="process-step-title">Crear</h3>
                 <p class="process-step-desc">Desarrollo conceptos creativos, guiones, hooks de retención y piezas pensadas para conectar con la comunidad.</p>
             </div>
             <!-- 04 -->
-            <div class="process-step-card">
+            <div class="process-step-card reveal-on-scroll">
                 <div class="process-num-badge">04</div>
                 <h3 class="process-step-title">Ejecutar</h3>
                 <p class="process-step-desc">Produzco, grabo, adapto y edito el contenido para que cada pieza cumpla un propósito claro dentro del feed.</p>
             </div>
             <!-- 05 -->
-            <div class="process-step-card">
+            <div class="process-step-card reveal-on-scroll">
                 <div class="process-num-badge">05</div>
                 <h3 class="process-step-title">Optimizar</h3>
                 <p class="process-step-desc">Analizo métricas de rendimiento (engagement, retención, views) y ajusto la estrategia para seguir evolucionando.</p>
             </div>
         </div>
     </div>
-</main>
+</section>
 
-<!-- TAB 5: SERVICIOS -->
-<main id="tab-servicios" class="tab-panel" style="background-color: var(--violet-soft-bg);">
+<!-- SECCIÓN 5: SERVICIOS -->
+<section id="tab-servicios" class="tab-panel" style="background-color: var(--violet-soft-bg);">
     <div class="panel-section-wrapper">
         <div class="section-header-centered">
             <span class="section-kicker">Lo que puedo hacer</span>
@@ -1369,7 +1472,7 @@ body {
 
         <div class="services-grid">
             <!-- SERVICIO 1 -->
-            <div class="service-box-card">
+            <div class="service-box-card reveal-on-scroll">
                 <div class="service-icon-circle">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 </div>
@@ -1389,8 +1492,8 @@ body {
                 </div>
             </div>
 
-            <!-- SERVICIO 2 -->
-            <div class="service-box-card featured">
+            <!-- SERVICIO 2 (FEATURED) -->
+            <div class="service-box-card featured reveal-on-scroll">
                 <div class="service-icon-circle" style="background-color: var(--violet-primary); color: #ffffff;">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                 </div>
@@ -1411,7 +1514,7 @@ body {
             </div>
 
             <!-- SERVICIO 3 -->
-            <div class="service-box-card">
+            <div class="service-box-card reveal-on-scroll">
                 <div class="service-icon-circle">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
                 </div>
@@ -1432,10 +1535,10 @@ body {
             </div>
         </div>
     </div>
-</main>
+</section>
 
-<!-- TAB 6: INSPIRACIÓN & VALORES -->
-<main id="tab-inspiracion" class="tab-panel" style="background-color: var(--dark-main); color: #ffffff;">
+<!-- SECCIÓN 6: INSPIRACIÓN & VALORES -->
+<section id="tab-inspiracion" class="tab-panel" style="background-color: var(--dark-main); color: #ffffff;">
     <div class="panel-section-wrapper dark-mode">
         <div class="section-header-centered">
             <span class="section-kicker on-dark">Valores y visión</span>
@@ -1446,21 +1549,21 @@ body {
         </div>
 
         <div class="values-grid">
-            <div class="value-card">
+            <div class="value-card reveal-on-scroll">
                 <h4>💡 Las ideas</h4>
                 <p>Transformar conceptos complejos en mensajes simples, frescos, relevantes y altamente memorables.</p>
             </div>
-            <div class="value-card">
+            <div class="value-card reveal-on-scroll">
                 <h4>👥 Las personas</h4>
                 <p>Entender cómo piensan, qué las emociona en el día a día y qué las motiva a conectar genuinamente con una marca.</p>
             </div>
-            <div class="value-card">
+            <div class="value-card reveal-on-scroll">
                 <h4>🚀 El impacto</h4>
                 <p>Crear contenido que no sea simplemente pasajero, sino que genere conexiones reales y construya valor a través del tiempo.</p>
             </div>
         </div>
 
-        <div class="passions-banner">
+        <div class="passions-banner reveal-on-scroll">
             <div class="passions-text">
                 <h4>Lo que me inspira en el día a día</h4>
                 <p>Creo que la creatividad no empieza frente a un brief en blanco; empieza viajando, consumiendo cultura, observando a las personas y encontrando magia en lo cotidiano.</p>
@@ -1474,12 +1577,12 @@ body {
             </div>
         </div>
     </div>
-</main>
+</section>
 
-<!-- TAB 7: CONTACTO -->
-<main id="tab-contacto" class="tab-panel" style="background-color: var(--violet-soft-bg);">
+<!-- SECCIÓN 7: CONTACTO -->
+<section id="tab-contacto" class="tab-panel" style="background-color: var(--violet-soft-bg);">
     <div class="panel-section-wrapper">
-        <div class="cta-box-card">
+        <div class="cta-box-card reveal-on-scroll">
             <span class="section-kicker" style="margin-bottom: 1.2rem;">Hablemos</span>
             <h2 class="cta-title-italic">¿Construimos algo juntos?</h2>
             <p class="cta-subtitle">
@@ -1503,7 +1606,7 @@ body {
             </div>
         </div>
     </div>
-</main>
+</section>
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
@@ -1524,31 +1627,31 @@ body {
 <div class="mobile-bottom-dock">
     <div class="mobile-dock-row-icons">
         <!-- 1. Inicio -->
-        <button onclick="switchTab('tab-inicio')" class="dock-icon-btn active" data-tab="tab-inicio" title="Inicio" aria-label="Inicio">
+        <button onclick="navigateToSection('tab-inicio')" class="dock-icon-btn active" data-tab="tab-inicio" title="Inicio" aria-label="Inicio">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         </button>
         <!-- 2. Casos -->
-        <button onclick="switchTab('tab-casos')" class="dock-icon-btn" data-tab="tab-casos" title="Casos de éxito" aria-label="Casos">
+        <button onclick="navigateToSection('tab-casos')" class="dock-icon-btn" data-tab="tab-casos" title="Casos de éxito" aria-label="Casos">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
         </button>
         <!-- 3. Videos -->
-        <button onclick="switchTab('tab-videos')" class="dock-icon-btn" data-tab="tab-videos" title="Videos y TikToks" aria-label="Videos">
+        <button onclick="navigateToSection('tab-videos')" class="dock-icon-btn" data-tab="tab-videos" title="Videos y TikToks" aria-label="Videos">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
         </button>
         <!-- 4. Proceso -->
-        <button onclick="switchTab('tab-proceso')" class="dock-icon-btn" data-tab="tab-proceso" title="Mi proceso" aria-label="Proceso">
+        <button onclick="navigateToSection('tab-proceso')" class="dock-icon-btn" data-tab="tab-proceso" title="Mi proceso" aria-label="Proceso">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6"></path><circle cx="12" cy="12" r="10"></circle></svg>
         </button>
         <!-- 5. Servicios -->
-        <button onclick="switchTab('tab-servicios')" class="dock-icon-btn" data-tab="tab-servicios" title="Servicios" aria-label="Servicios">
+        <button onclick="navigateToSection('tab-servicios')" class="dock-icon-btn" data-tab="tab-servicios" title="Servicios" aria-label="Servicios">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
         </button>
         <!-- 6. Inspiración -->
-        <button onclick="switchTab('tab-inspiracion')" class="dock-icon-btn" data-tab="tab-inspiracion" title="Inspiración" aria-label="Inspiración">
+        <button onclick="navigateToSection('tab-inspiracion')" class="dock-icon-btn" data-tab="tab-inspiracion" title="Inspiración" aria-label="Inspiración">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
         </button>
         <!-- 7. Contacto Directo destacado -->
-        <button onclick="switchTab('tab-contacto')" class="dock-icon-btn dock-icon-btn-contact-highlight" data-tab="tab-contacto" title="Contacto directo" aria-label="Contacto directo">
+        <button onclick="navigateToSection('tab-contacto')" class="dock-icon-btn dock-icon-btn-contact-highlight" data-tab="tab-contacto" title="Contacto directo" aria-label="Contacto directo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         </button>
     </div>
@@ -1649,41 +1752,121 @@ body {
 
 <script>
 /* ========================================================
-   SISTEMA DE PESTAÑAS (TAB SWITCHER SPA)
+   NAVEGACIÓN HÍBRIDA (FULL SCROLL EN WEB + SPA EN MOBILE)
    ======================================================== */
-function switchTab(tabId) {
-    // 1. Ocultar todos los paneles
-    document.querySelectorAll('.tab-panel').forEach(function(panel) {
-        panel.classList.remove('active');
-    });
+var isMobile = function() {
+    return window.innerWidth <= 920;
+};
 
-    // 2. Mostrar el panel seleccionado
-    var activePanel = document.getElementById(tabId);
-    if (activePanel) {
-        activePanel.classList.add('active');
+function navigateToSection(sectionId) {
+    if (isMobile()) {
+        // En mobile: switch directo de paneles SPA
+        document.querySelectorAll('.tab-panel').forEach(function(panel) {
+            panel.classList.remove('active');
+        });
+        var activePanel = document.getElementById(sectionId);
+        if (activePanel) {
+            activePanel.classList.add('active');
+        }
+        updateActiveNavButtons(sectionId);
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    } else {
+        // En desktop: scroll suave continuo con compensación del header sticky
+        var targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        updateActiveNavButtons(sectionId);
     }
-
-    // 3. Actualizar botones activos en Navbar Desktop (Texto)
-    document.querySelectorAll('.nav-tab-pill').forEach(function(btn) {
-        if (btn.getAttribute('data-tab') === tabId) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-
-    // 4. Actualizar botones activos en Dock Mobile (Solo Íconos)
-    document.querySelectorAll('.dock-icon-btn').forEach(function(btn) {
-        if (btn.getAttribute('data-tab') === tabId) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-
-    // 5. Ir arriba instantáneamente para lectura cómoda
-    window.scrollTo({ top: 0, behavior: 'instant' });
 }
+
+// Actualiza los estados 'active' en la botonera desktop y mobile
+function updateActiveNavButtons(sectionId) {
+    document.querySelectorAll('.nav-tab-pill').forEach(function(btn) {
+        if (btn.getAttribute('data-tab') === sectionId) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    document.querySelectorAll('.dock-icon-btn').forEach(function(btn) {
+        if (btn.getAttribute('data-tab') === sectionId) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+/* ========================================================
+   SCROLLSPY PARA DESKTOP (ACTUALIZA BOTONES AL SCROLLEAR)
+   ======================================================== */
+function initScrollSpy() {
+    if (isMobile()) return;
+
+    var sections = document.querySelectorAll('.tab-panel');
+    var navPills = document.querySelectorAll('.nav-tab-pill');
+
+    var observerOptions = {
+        root: null,
+        rootMargin: '-30% 0px -50% 0px',
+        threshold: 0
+    };
+
+    var spyObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var activeId = entry.target.getAttribute('id');
+                navPills.forEach(function(pill) {
+                    if (pill.getAttribute('data-tab') === activeId) {
+                        pill.classList.add('active');
+                    } else {
+                        pill.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(function(section) {
+        spyObserver.observe(section);
+    });
+}
+
+/* ========================================================
+   ANIMACIONES DE SCROLL EDITORIALES
+   ======================================================== */
+function initScrollAnimations() {
+    var animatedElements = document.querySelectorAll('.reveal-on-scroll');
+
+    var animObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target); // Animación se ejecuta de forma natural una vez
+            }
+        });
+    }, {
+        rootMargin: '0px 0px -60px 0px',
+        threshold: 0.12
+    });
+
+    animatedElements.forEach(function(el) {
+        animObserver.observe(el);
+    });
+}
+
+// Inicializar al cargar el DOM
+window.addEventListener('DOMContentLoaded', function() {
+    initScrollSpy();
+    initScrollAnimations();
+});
+
+// Reajustar al cambiar de tamaño de pantalla
+window.addEventListener('resize', function() {
+    initScrollSpy();
+});
 
 /* ========================================================
    MODAL CONTROLLERS & INTERACTIONS
